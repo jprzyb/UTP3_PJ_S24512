@@ -11,7 +11,7 @@ public class Letters {
             int x = i;
             threads.add(new Thread(()->{
                 while(!threads.get(x).isInterrupted()) System.out.print(letters.charAt(x));
-            }));
+            }, "Thread "+letters.charAt(i)));
         }
     }
     public List<Thread> getThreads(){
