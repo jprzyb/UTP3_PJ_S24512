@@ -22,7 +22,7 @@ public class StringTask implements Runnable{
     public void run() {
         state = TaskState.RUNNING;
         for(int k=0;k<i;k++){
-            if(state.equals(TaskState.ABORTED)){
+            if(thread.isInterrupted()){
                 break;
             }
             result+=a;
@@ -30,6 +30,7 @@ public class StringTask implements Runnable{
         if(!state.equals(TaskState.ABORTED)) state =TaskState.READY;
     }
     public void abort(){
+        thread.interrupt();
         state = TaskState.ABORTED;
     }
     public void start(){
