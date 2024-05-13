@@ -15,7 +15,7 @@ public class Writer implements Runnable {
 
     @Override
     public void run() {
-        while(true){
+        while(!author.isDone()){
             if(!author.isDone()){
                 String msg = author.getMsgFromQueue();
                 System.out.println("Msg: " + msg);

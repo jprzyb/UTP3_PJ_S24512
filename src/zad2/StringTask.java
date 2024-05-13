@@ -30,8 +30,8 @@ public class StringTask implements Runnable{
         if(!state.equals(TaskState.ABORTED)) state =TaskState.READY;
     }
     public void abort(){
-        thread.interrupt();
         state = TaskState.ABORTED;
+        thread.interrupt();
     }
     public void start(){
         thread.start();

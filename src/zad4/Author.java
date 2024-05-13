@@ -11,21 +11,21 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class Author implements Runnable {
-    private final String[] msgs;
+    private final String[] args;
     private final BlockingQueue<String> queue;
     private int alreadySent;
-    public Author(String[] msgs) {
+    public Author(String[] args) {
         alreadySent = 0;
-        this.msgs = msgs;
-        queue = new ArrayBlockingQueue<>(this.msgs.length);
+        this.args = args;
+        queue = new ArrayBlockingQueue<>(this.args.length);
     }
     @Override
     public void run() {
-        for(String msg : msgs){
+        for(String msg : args){
             queue.add(msg);
             alreadySent ++;
             try {
-                Thread.sleep(1000);
+                if(!isDone()) Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -40,6 +40,6 @@ public class Author implements Runnable {
         }
     }
     public boolean isDone(){
-        return alreadySent == msgs.length;
+        return alreadySent == args.length;
     }
 }
